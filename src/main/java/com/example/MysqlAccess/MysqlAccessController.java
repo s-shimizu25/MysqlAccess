@@ -45,10 +45,11 @@ public class MysqlAccessController {
 	@PostMapping(path="/register")
 	public @ResponseBody String addNewCustomer(	  @RequestParam String c_num 
 												, @RequestParam String c_name
-												, @RequestParam String address) {
+												, @RequestParam String address
+												, @RequestParam String tel ) {
 		
 		Customer customerAddData = new Customer();
-		customerAddData.setAll(c_num,c_name,address);
+		customerAddData.setAll(c_num,c_name,address,tel);
 		
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		customerAddData.setCreate_date(timestamp);
