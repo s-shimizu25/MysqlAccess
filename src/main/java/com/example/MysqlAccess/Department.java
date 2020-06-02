@@ -2,33 +2,24 @@ package com.example.MysqlAccess;
 
 
 import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="M_CUSTOMER")
-public class Customer {
+@Table(name="M_DEPARTMENT")
+public class Department {
 	@Id
 	
-	//顧客コード
-	@Column(name="C_CD" ,columnDefinition = "VARCHAR(4)")
-	private String c_num;
+	//部署コード
+	@Column(name="D_CD" ,columnDefinition = "CHAR(2)")
+	private String d_cd;
 	
-	//顧客名
-	@Column(name="C_NAME" ,nullable = false ,columnDefinition = "VARCHAR(100)")
-	private String c_name;
+	//部署名
+	@Column(name="D_NAME" ,columnDefinition = "VARCHAR(100)")
+	private String d_name;
 	
-	//住所
-	@Column(name="ADDRESS" ,columnDefinition = "VARCHAR(256)")
-	private String address;
-	
-	//電話番号
-	@Column(name="TEL" ,columnDefinition = "VARCHAR(11)")
-	private String tel;
-
 	//更新日時
 	@Column(name="UPDATE_DATE" ,columnDefinition = "datetime")
 	private Timestamp update_date;
@@ -46,42 +37,28 @@ public class Customer {
 	private String create_user;
 	
 	
-	public String getC_num() {
-		return c_num;
+	
+	public String getD_cd() {
+		return d_cd;
 	}
-	public void setC_num(String c_num) {
-		this.c_num = c_num;
+	public void setD_num(String d_cd) {
+		this.d_cd = d_cd;
 	}
-	public String getC_name() {
-		return c_name;
+	public String getD_name() {
+		return d_name;
 	}
-	public void setC_name(String c_name) {
-		this.c_name = c_name;
+	public void setD_name(String d_name) {
+		this.d_name = d_name;
 	}
-	public String getAddress() {
-		return address;
-	}
-	public void setAddress(String address) {
-		this.address = address;
-	}	
-	public String getTel() {
-		return tel;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
+	
+	
 
-	//値をまとめてセットする
-	public void setAll(  String c_num
-						,String c_name
-						,String address
-						,String tel
+	public void setAll(  String d_cd
+						,String d_name
 						) {
-		this.c_num = c_num;
-		this.c_name = c_name;
-		this.address = address;
-		this.tel = tel;
-		
+		this.d_cd = d_cd;
+		this.d_name = d_name;
+
 	}
 	
 	
@@ -112,3 +89,6 @@ public class Customer {
 	}
 
 }
+
+
+

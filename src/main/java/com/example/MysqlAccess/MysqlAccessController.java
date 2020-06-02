@@ -24,16 +24,16 @@ public class MysqlAccessController {
 	private EmployeeRepository employeeRepository;
 	
 	
+	
 
-
-	@RequestMapping("/")
+	/*pathが呼び出されたときに行う処理*/
+	
+	//"/"の時index.htmlを表示
+	@RequestMapping(path="/")
     public String index() {
 		// DBアクセスTop画面を表示
         return "index";
     }
-	
-	
-	
 	
 	@GetMapping(path="/all")
 	public String list(Model model) {
@@ -43,7 +43,7 @@ public class MysqlAccessController {
 		// モデルに属性追加
 		model.addAttribute("customerlist",customerList);
 
-		// データ一覧画面を表示
+		// データ一覧画面(html)を表示
 		return "list";
 	}
 	
@@ -55,7 +55,7 @@ public class MysqlAccessController {
 		// モデルに属性追加
 		model.addAttribute("departmentlist",departmentList);
 
-		// データ一覧画面を表示
+		// データ一覧画面(html)を表示
 		return "d_list";
 	}
 	
@@ -68,31 +68,30 @@ public class MysqlAccessController {
 		// モデルに属性追加
 		model.addAttribute("employeelist",employeeList);
 
-		// データ一覧画面を表示
+		// データ一覧画面(html)を表示
 		return "e_list";
 	}
 	
 	
 	
-	
-
-	
-	
+	//顧客名簿
 	@RequestMapping("/insert")
     public String insert() {
-		// データ登録画面を表示
+		// データ登録画面(html)を表示
         return "insert";
     }
 	
+	//部署名簿
 	@RequestMapping("/d_insert")
     public String d_insert() {
-		// データ登録画面を表示
+		// データ登録画面(html)を表示
         return "d_insert";
     }
 	
+	//従業員名簿
 	@RequestMapping("/e_insert")
     public String e_insert() {
-		// データ登録画面を表示
+		// データ登録画面(html)を表示
         return "e_insert";
     }
 	
@@ -101,16 +100,19 @@ public class MysqlAccessController {
 	
 
 	
-	// DB登録処理
+	/*DB登録処理*/
+	
+	//顧客名簿の登録
 	@PostMapping(path="/register")
 	public @ResponseBody String addNewCustomer(	  @RequestParam String c_num 
 												, @RequestParam String c_name
 												, @RequestParam String address
-												, @RequestParam String tel ) {
+												, @RequestParam String tel ) { 
+		//customerAddDataに代入
+		Customer customerAddData = new Customer();			//customerAddDataオブジェクトの生成
+		customerAddData.setAll(c_num,c_name,address,tel);	//引数の代入
 		
-		Customer customerAddData = new Customer();
-		customerAddData.setAll(c_num,c_name,address,tel);
-		
+		//作成日時、作成者、更新日時、更新者の代入
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		customerAddData.setCreate_date(timestamp);
 		customerAddData.setCreate_user("auto_system");
@@ -122,14 +124,15 @@ public class MysqlAccessController {
 		return "登録しました";
 	}
 	
-	// DB登録処理
+	//部署名簿の登録
 	@PostMapping(path="/d_register")
 	public @ResponseBody String addNewDepartment(	  @RequestParam String d_cd
 													, @RequestParam String d_name) {
 				
-		Department departmentAddData = new Department();
-		departmentAddData.setAll(d_cd,d_name);
+		Department departmentAddData = new Department();	//departmentAddDataオブジェクトの生成
+		departmentAddData.setAll(d_cd,d_name);				//引数の代入
 					
+		//作成日時、作成者、更新日時、更新者の代入
 		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 		departmentAddData.setCreate_date(timestamp);
 		departmentAddData.setCreate_user("auto_system");
@@ -141,16 +144,17 @@ public class MysqlAccessController {
 		return "登録しました";
 		}
 	
-	// DB登録処理
+	//従業員名簿の登録
 		@PostMapping(path="/e_register")
 		public @ResponseBody String addNewEmployee(	  @RequestParam String e_num 
 													, @RequestParam String e_name
 													, @RequestParam int e_year
 													, @RequestParam String depart_cd) {
 					
-			Employee employeeAddData = new Employee();
-			employeeAddData.setAll(e_num,e_name,e_year,depart_cd);
+			Employee employeeAddData = new Employee();				//employeeAddDataオブジェクトの生成
+			employeeAddData.setAll(e_num,e_name,e_year,depart_cd);	//引数の代入
 						
+			//作成日時、作成者、更新日時、更新者の代入
 			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 			employeeAddData.setCreate_date(timestamp);
 			employeeAddData.setCreate_user("auto_system");
