@@ -46,6 +46,8 @@ public class Customer {
 	private String create_user;
 	
 	
+	//入力された値をget変数に代入し、引数にsetする
+	
 	public String getC_num() {
 		return c_num;
 	}
@@ -85,6 +87,7 @@ public class Customer {
 	}
 	
 	
+	//更新日時、更新者、作成日時、作成者のセット
 
 	public Timestamp getCreate_date() {
 		return create_date;

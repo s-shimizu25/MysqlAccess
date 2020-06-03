@@ -37,6 +37,7 @@ public class Department {
 	private String create_user;
 	
 	
+	//入力された値をget変数に代入し、引数にsetする
 	
 	public String getD_cd() {
 		return d_cd;
@@ -62,6 +63,7 @@ public class Department {
 	}
 	
 	
+	//更新日時、更新者、作成日時、作成者のセット
 
 	public Timestamp getCreate_date() {
 		return create_date;

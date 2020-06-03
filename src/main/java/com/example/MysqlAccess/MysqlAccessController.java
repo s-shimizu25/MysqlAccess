@@ -35,6 +35,7 @@ public class MysqlAccessController {
         return "index";
     }
 	
+	
 	@GetMapping(path="/all")
 	public String list(Model model) {
 		// M_CUSTOMERテーブルの全データを取得
@@ -145,29 +146,26 @@ public class MysqlAccessController {
 		}
 	
 	//従業員名簿の登録
-		@PostMapping(path="/e_register")
-		public @ResponseBody String addNewEmployee(	  @RequestParam String e_num 
-													, @RequestParam String e_name
-													, @RequestParam int e_year
-													, @RequestParam String depart_cd) {
+	@PostMapping(path="/e_register")
+	public @ResponseBody String addNewEmployee(	  @RequestParam String e_num 
+												, @RequestParam String e_name
+												, @RequestParam int e_year
+												, @RequestParam String depart_cd) {
+				
+		Employee employeeAddData = new Employee();				//employeeAddDataオブジェクトの生成
+		employeeAddData.setAll(e_num,e_name,e_year,depart_cd);	//引数の代入
 					
-			Employee employeeAddData = new Employee();				//employeeAddDataオブジェクトの生成
-			employeeAddData.setAll(e_num,e_name,e_year,depart_cd);	//引数の代入
+		//作成日時、作成者、更新日時、更新者の代入
+		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		employeeAddData.setCreate_date(timestamp);
+		employeeAddData.setCreate_user("auto_system");
+		employeeAddData.setUpdate_date(timestamp);
+		employeeAddData.setUpdate_user("auto_system");
+					
+		employeeRepository.save(employeeAddData);
 						
-			//作成日時、作成者、更新日時、更新者の代入
-			Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-			employeeAddData.setCreate_date(timestamp);
-			employeeAddData.setCreate_user("auto_system");
-			employeeAddData.setUpdate_date(timestamp);
-			employeeAddData.setUpdate_user("auto_system");
-						
-			employeeRepository.save(employeeAddData);
-						
-			return "登録しました";
+		return "登録しました";
 			
-			}
-	
-	
-	
-	
+		}
+
 }

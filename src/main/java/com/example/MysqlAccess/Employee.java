@@ -46,7 +46,7 @@ public class Employee {
 	private String create_user;
 	
 	
-	
+	//入力された値をget変数に代入し、引数にsetする
 	
 	public String getE_num() {
 		return e_num;
@@ -77,7 +77,7 @@ public class Employee {
 	}
 
 	
-	
+	//まとめて値をセット
 	public void setAll(  String e_num
 						,String e_name
 						,int e_year
@@ -91,6 +91,7 @@ public class Employee {
 	}
 	
 	
+	//更新日時、更新者、作成日時、作成者のセット
 
 	public Timestamp getCreate_date() {
 		return create_date;
